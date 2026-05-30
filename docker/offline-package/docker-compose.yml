@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  backend:
+    build:
+      context: ..
+      dockerfile: docker/backend/Dockerfile
+    image: multimedia-review-backend:1.0.0
+    container_name: multimedia-review-backend
+    restart: unless-stopped
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - JWT_SECRET=${JWT_SECRET:-change-me-in-production-use-a-strong-secret}
+      - FILE_UPLOAD_DIR=/app/uploads
+    volumes:
+      - multimedia-review-data:/app/data
+      - multimedia-review-uploads:/app/uploads
+    networks:
+      - multimedia-review-net
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: docker/frontend/Dockerfile
+    image: multimedia-review-frontend:1.0.0
+    container_name: multimedia-review-frontend
+    restart: unless-stopped
+    ports:
+      - "${FRONTEND_PORT:-80}:80"
+    depends_on:
+      - backend
+    networks:
+      - multimedia-review-net
+
+volumes:
+  multimedia-review-data:
+  multimedia-review-uploads:
+
+networks:
+  multimedia-review-net:
+    driver: bridge

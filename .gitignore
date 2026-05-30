@@ -38,5 +38,4 @@ backend/data/
 *.log
 
 # ===== Docker =====
-docker/offline-package/
 
