@@ -1,0 +1,55 @@
+spring:
+  profiles:
+    active: dev
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 520MB
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:multimedia-review-secret-key-must-be-at-least-256-bits-long}
+    expiration-ms: 86400000
+  file:
+    upload-dir: ${FILE_UPLOAD_DIR:./uploads}
+    allowed-text-extensions: txt,doc,docx,pdf,xls,xlsx,ppt,pptx
+    allowed-image-extensions: jpg,jpeg,png,gif,bmp,webp,svg
+    allowed-video-extensions: mp4,mov,avi,mkv,wmv,flv,webm
+    allowed-audio-extensions: mp3,wav,aac,flac,ogg,wma
+    max-text-size: 10485760
+    max-image-size: 20971520
+    max-video-size: 524288000
+    max-audio-size: 52428800
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:h2:file:./data/multimediareview;AUTO_SERVER=TRUE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:mysql://localhost:3306/multimedia_review?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf8mb4
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:root}

@@ -1,0 +1,9 @@
+**/node_modules/
+**/target/
+**/dist/
+**/data/
+**/uploads/
+**/docker/offline-package/
+**/.git/
+**/.claude/
+**/*.log

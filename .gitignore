@@ -1,0 +1,42 @@
+# ===== Java / Maven =====
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!mvnw
+!mvnw.cmd
+*.class
+*.jar
+*.war
+*.nar
+
+# ===== Node.js / Vite =====
+node_modules/
+dist/
+*.tsbuildinfo
+
+# ===== IDE =====
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ===== Environment =====
+.env
+.env.local
+.env.*.local
+
+# ===== Runtime Data =====
+data/
+backend/uploads/
+backend/data/
+*.log
+
+# ===== Docker =====
+docker/offline-package/
+
